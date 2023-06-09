@@ -15,9 +15,20 @@ import ImagesGenerations from './handlers/images-generations';
 import ImagesVariations from './handlers/images-variations';
 import Models from './handlers/models';
 import Moderations from './handlers/moderations';
+/**
+ * Represents a promise that will resolve with data of type `Data`.
+ * Extends `AxiosPromise<Data>`.
+ */
 export interface ClientPromise<Data> extends AxiosPromise<Data> {}
 /**
- * An HTTP request.
+ * Represents an HTTP request made by a client.
+ * @interface
+ * @property {string} method - The HTTP method used for the request. Can be 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', or 'OPTIONS'.
+ * @property {string} path - The path of the requested resource.
+ * @property {AxiosRequestConfig['data']} [data] - The data to be sent with the request.
+ * @property {AxiosRequestHeaders} [headers] - The headers to be included in the request.
+ * @property {AxiosRequestConfig['params']} [params] - The query parameters to be included in the request.
+ * @property {string[]} [uploads] - An array of file paths to be uploaded with the request.
  */
 export interface ClientRequest {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS';

@@ -4,6 +4,12 @@ import CreateRequest from '../models/fine-tunes/create-request';
 import CreateResponse from '../models/fine-tunes/create-response';
 import ListResponse from '../models/fine-tunes/list-response';
 import RetrieveResponse from '../models/fine-tunes/retrieve-response';
+/**
+ * Represents a client for interacting with the FineTunes API.
+ * @class
+ * @param {Client} Client - The client instance to be used for making requests.
+ * @returns {FineTunes} - An instance of the FineTunes class.
+ */
 export default class FineTunes {
   client: Client;
   constructor(Client: Client);

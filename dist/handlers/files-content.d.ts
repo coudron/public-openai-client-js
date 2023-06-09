@@ -5,12 +5,12 @@ export default class FilesContent {
   client: Client;
   constructor(Client: Client);
   /**
-   * Returns the contents of the specified file
+   * Downloads the contents of the specified file.
    *
-   * Operation URL: GET /files/{file_id}/content
-   * Operation ID:  downloadFile
+   * @param fileId The ID of the file to download.
+   * @param config Optional Axios request configuration.
    *
-   * @param fileId The ID of the file to use for this request
+   * @returns A Promise that resolves with a DownloadResponse object.
    */
   download(fileId: string, config?: AxiosRequestConfig): ClientPromise<DownloadResponse>;
 }

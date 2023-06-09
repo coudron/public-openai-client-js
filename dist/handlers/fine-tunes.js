@@ -1,5 +1,8 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+/**
+ * Class representing FineTunes API client.
+ */
 class FineTunes {
   constructor (Client) {
     this.client = Client;

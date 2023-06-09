@@ -4,6 +4,9 @@ import ListResponse from '../models/models/list-response';
 import RetrieveResponse from '../models/models/retrieve-response';
 import DeleteResponse from '../models/models/delete-response';
 
+/**
+ * Represents a collection of methods for interacting with the Clarifai Models API.
+ */
 export default class Models {
   client: Client;
   constructor(Client: Client) {

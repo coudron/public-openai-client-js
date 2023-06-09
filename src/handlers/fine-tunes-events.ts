@@ -2,6 +2,10 @@ import { AxiosRequestConfig } from 'axios';
 import Client, { ClientPromise } from '../client';
 import ListFineTuneResponse from '../models/fine-tunes-events/list-fine-tune-response';
 
+/**
+ * Represents a class for retrieving fine-grained status updates for a fine-tune job.
+ * @class
+ */
 export default class FineTunesEvents {
   client: Client;
   constructor(Client: Client) {

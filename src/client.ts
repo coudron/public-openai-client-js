@@ -21,10 +21,21 @@ import ImagesVariations from './handlers/images-variations';
 import Models from './handlers/models';
 import Moderations from './handlers/moderations';
 
+/**
+ * Represents a promise that will resolve with data of type `Data`.
+ * Extends `AxiosPromise<Data>`.
+ */
 export interface ClientPromise<Data> extends AxiosPromise<Data> {}
 
 /**
- * An HTTP request.
+ * Represents an HTTP request made by a client.
+ * @interface
+ * @property {string} method - The HTTP method used for the request. Can be 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', or 'OPTIONS'.
+ * @property {string} path - The path of the requested resource.
+ * @property {AxiosRequestConfig['data']} [data] - The data to be sent with the request.
+ * @property {AxiosRequestHeaders} [headers] - The headers to be included in the request.
+ * @property {AxiosRequestConfig['params']} [params] - The query parameters to be included in the request.
+ * @property {string[]} [uploads] - An array of file paths to be uploaded with the request.
  */
 export interface ClientRequest {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS';
@@ -36,7 +47,28 @@ export interface ClientRequest {
 }
 
 /**
- * Holds and interacts with the Axios Client.
+ * Represents a client for interacting with the Axios HTTP library.
+ * @class
+ * @template Data - The type of data returned by the HTTP response.
+ * @property {AxiosInstance} instance - The Axios instance used for making HTTP requests.
+ * @property {Completions} completions - Access to the Completions handler.
+ * @property {ChatCompletions} chatCompletions - Access to the ChatCompletions handler.
+ * @property {Edits} edits - Access to the Edits handler.
+ * @property {Embeddings} embeddings - Access to the Embeddings handler.
+ * @property {AudioTranscriptions} audioTranscriptions - Access to the AudioTranscriptions handler.
+ * @property {AudioTranslations} audioTranslations - Access to the AudioTranslations handler.
+ * @property {Files} files - Access to the Files handler.
+ * @property {FilesContent} filesContent - Access to the FilesContent handler.
+ * @property {FineTunes} fineTunes - Access to the FineTunes handler.
+ * @property {FineTunesCancel} fineTunesCancel - Access to the FineTunesCancel handler.
+ * @property {FineTunesEvents} fineTunesEvents - Access to the FineTunesEvents handler.
+ * @property {ImagesEdits} imagesEdits - Access to the ImagesEdits handler.
+ * @property {ImagesGenerations} imagesGenerations - Access to the ImagesGenerations handler.
+ * @property {ImagesVariations} imagesVariations - Access to the ImagesVariations handler.
+ * @property {Models} models - Access to the Models handler.
+ * @property {Moderations} moderations - Access to the Moderations handler.
+ * @param {AxiosInstance} instance - The Axios instance used for making HTTP requests.
+ * @returns {ClientPromise<Data>} - A promise that resolves with the HTTP response data or rejects with a ClientError.
  */
 export default class {
   instance: AxiosInstance;
@@ -126,7 +158,11 @@ export default class {
   }
 
   /**
-   * Encode the request body.
+   * Encodes the request body based on the Content-Type header in the AxiosRequestConfig object.
+   * @param {ClientRequest} request - The request object containing the data to be encoded.
+   * @param {AxiosRequestConfig} config - The AxiosRequestConfig object containing the headers.
+   * @returns {AxiosRequestConfig['data']} - The encoded request body.
+   * @throws {ClientError} - If the Content-Type header is not set or has an unexpected value.
    */
   #encodeBody(request: ClientRequest, config: AxiosRequestConfig): AxiosRequestConfig['data'] {
     if (!config.headers || !config.headers['Content-Type']) {
@@ -164,9 +200,10 @@ export default class {
   }
 
   /**
-   * Search header key in the header object case insensitively.
-   *
-   * Return the matched keys from headers object or false if not found.
+   * Searches for a header key in the header object case insensitively.
+   * @param key - The header key to search for.
+   * @param headers - The headers object to search in.
+   * @returns The matched header key from the headers object or false if not found.
    */
   #includeInHeader(key: string, headers: AxiosRequestHeaders): string | false {
     const headerKeys = Object.keys(headers).reduce((keys, key) => {
@@ -180,7 +217,15 @@ export default class {
   }
 
   /**
-   * Merge two set of headers together.
+   * Merges two sets of headers together.
+   *
+   * @param {AxiosRequestHeaders} targetHeader - The target header to merge into.
+   * @param {AxiosRequestHeaders} sourceHeader - The source header to merge from.
+   * @returns {AxiosRequestHeaders} - The merged headers.
+   *
+   * @remarks
+   * If the User-Agent or Content-Type headers are not present in either header set, they will be added with default values.
+   * If a header key already exists in the target header, the source header's value will not be added.
    */
   #mergeHeaders(targetHeader: AxiosRequestHeaders, sourceHeader: AxiosRequestHeaders): AxiosRequestHeaders {
     if (!targetHeader['User-Agent'] && !this.#includeInHeader('User-Agent', sourceHeader)) {

@@ -1,4 +1,24 @@
 import CreateRequestLogitBias from './create-request-logit-bias';
+/**
+ * Interface for creating a request to generate completions using OpenAI's GPT-3 API.
+ * @interface
+ * @property {string} model - ID of the model to use.
+ * @property {any} [prompt] - The prompt(s) to generate completions for.
+ * @property {string|null} [suffix] - The suffix that comes after a completion of inserted text.
+ * @property {number|null} [max_tokens] - The maximum number of tokens to generate in the completion.
+ * @property {number|null} [temperature] - What sampling temperature to use.
+ * @property {number|null} [top_p] - An alternative to sampling with temperature, called nucleus sampling.
+ * @property {number|null} [n] - How many completions to generate for each prompt.
+ * @property {boolean|null} [stream] - Whether to stream back partial progress.
+ * @property {number|null} [logprobs] - Include the log probabilities on the logprobs most likely tokens.
+ * @property {boolean|null} [echo] - Echo back the prompt in addition to the completion.
+ * @property {any} [stop] - Up to 4 sequences where the API will stop generating further tokens.
+ * @property {number|null} [presence_penalty] - Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far.
+ * @property {number|null} [frequency_penalty] - Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far.
+ * @property {number|null} [best_of] - Generates best_of completions server-side and returns the "best".
+ * @property {CreateRequestLogitBias|null} [logit_bias] - Modify the likelihood of specified tokens appearing in the completion.
+ * @property {string} [user] - A unique identifier representing your end-user.
+ */
 export default interface CreateRequest {
   /**
    * ID of the model to use. You can use the List models API to see all of your

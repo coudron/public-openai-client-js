@@ -25,12 +25,10 @@ export default class Models {
    */
   retrieve(model: string, config?: AxiosRequestConfig): ClientPromise<RetrieveResponse>;
   /**
-   * Delete a fine-tuned model. You must have the Owner role in your organization.
-   *
-   * Operation URL: DELETE /models/{model}
-   * Operation ID:  deleteModel
-   *
-   * @param model The model to delete
+   * Deletes a fine-tuned model.
+   * @param model - The model to delete.
+   * @param config - Optional Axios request configuration.
+   * @returns A promise that resolves with a DeleteResponse object.
    */
   delete(model: string, config?: AxiosRequestConfig): ClientPromise<DeleteResponse>;
 }

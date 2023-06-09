@@ -1,5 +1,8 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+/**
+ * Class representing a set of methods for interacting with the Models API.
+ */
 class Models {
   constructor (Client) {
     this.client = Client;

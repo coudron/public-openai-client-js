@@ -1,5 +1,8 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+/**
+ * Represents a class for interacting with files belonging to the user's organization.
+ */
 class Files {
   constructor (Client) {
     this.client = Client;
@@ -23,13 +26,14 @@ class Files {
   }
 
   /**
-   * Upload a file that contains document(s) to be used across various
-   * endpoints/features. Currently, the size of all the files uploaded by one
-   * organization can be up to 1 GB. Please contact us if you need to increase the
-   * storage limit.
+   * Uploads a file to be used across various endpoints/features.
+   *
+   * @param {FormData} data - The file to be uploaded.
+   * @param {AxiosRequestConfig} config - Optional configuration for the request.
+   * @returns {Promise<AxiosResponse>} A Promise that resolves to the response from the server.
    *
    * Operation URL: POST /files
-   * Operation ID:  createFile
+   * Operation ID: createFile
    */
   create (data, config) {
     const path = '/files';

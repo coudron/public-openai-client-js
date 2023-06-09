@@ -7,9 +7,11 @@ export default class Embeddings {
   constructor(Client: Client);
   /**
    * Creates an embedding vector representing the input text.
-   *
-   * Operation URL: POST /embeddings
-   * Operation ID:  createEmbedding
+   * @param {CreateRequest} data - The data to create the embedding vector.
+   * @param {AxiosRequestConfig} [config] - Optional configuration for the Axios request.
+   * @returns {ClientPromise<CreateResponse>} A promise that resolves with the created embedding vector.
+   * @operation POST /embeddings
+   * @operationId createEmbedding
    */
   create(data: CreateRequest, config?: AxiosRequestConfig): ClientPromise<CreateResponse>;
 }

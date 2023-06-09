@@ -5,6 +5,9 @@ import CreateResponse from '../models/files/create-response';
 import DeleteResponse from '../models/files/delete-response';
 import ListResponse from '../models/files/list-response';
 import RetrieveResponse from '../models/files/retrieve-response';
+/**
+ * Represents a class for interacting with files in the user's organization.
+ */
 export default class Files {
   client: Client;
   constructor(Client: Client);
@@ -16,27 +19,32 @@ export default class Files {
    */
   list(config?: AxiosRequestConfig): ClientPromise<ListResponse>;
   /**
-   * Upload a file that contains document(s) to be used across various
-   * endpoints/features. Currently, the size of all the files uploaded by one
-   * organization can be up to 1 GB. Please contact us if you need to increase the
-   * storage limit.
+   * Creates a new edit with the provided input data and configuration.
    *
-   * Operation URL: POST /files
-   * Operation ID:  createFile
+   * @param {CreateRequest} data - The input data for the edit.
+   * @param {AxiosRequestConfig} [config] - Optional configuration for the Axios request.
+   * @returns {ClientPromise<CreateResponse>} A promise that resolves with the response data.
+   *
+   * Operation URL: POST /edits
+   * Operation ID: createEdit
    */
   create(data: CreateRequest, config?: AxiosRequestConfig): ClientPromise<CreateResponse>;
   /**
-   * Returns information about a specific file.
-   *
-   * Operation URL: GET /files/{file_id}
-   * Operation ID:  retrieveFile
+   * Retrieves information about a specific file.
+   * @param {string} fileID - The ID of the file to retrieve information for.
+   * @param {AxiosRequestConfig} [config] - Optional configuration for the Axios request.
+   * @returns {ClientPromise<RetrieveResponse>} - A promise that resolves with the retrieved file information.
+   * @operation GET /files/{file_id}
+   * @operationId retrieveFile
    */
   retrieve(fileID: string, config?: AxiosRequestConfig): ClientPromise<RetrieveResponse>;
   /**
-   * Delete a file.
-   *
-   * Operation URL: DELETE /files/{file_id}
-   * Operation ID:  deleteFile
+   * Deletes a file with the specified ID.
+   * @param {string} fileID - The ID of the file to delete.
+   * @param {AxiosRequestConfig} [config] - Optional configuration for the Axios request.
+   * @returns {ClientPromise<DeleteResponse>} A promise that resolves with a DeleteResponse object.
+   * @throws {ApiError} If the API returns an error.
+   * @remarks This method sends a DELETE request to the API endpoint at /files/{file_id}.
    */
   delete(fileID: string, config?: AxiosRequestConfig): ClientPromise<DeleteResponse>;
 }

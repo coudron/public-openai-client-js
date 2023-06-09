@@ -23,6 +23,12 @@ const httpLogger = (axiosResult: AxiosResponse | AxiosError) => {
   }
 };
 
+/**
+ * Class representing a TestClient that extends the Client class.
+ * @class
+ * @extends Client
+ * @template Data - Generic type parameter for the request data.
+ */
 class TestClient extends Client {
   request<Data>(request: ClientRequest, config?: AxiosRequestConfig): ClientPromise<Data> {
     return new Promise((resolve, reject) => {
